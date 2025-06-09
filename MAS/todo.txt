@@ -13,3 +13,5 @@ Jak zaimplementowac LocalDate
 brak etykiet
 
 StanUmowy na clds z wielkiej
+
+ZAimplementuj wyliczanie kwoty netto w Platnosci

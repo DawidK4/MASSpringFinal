@@ -34,6 +34,10 @@ import lombok.experimental.SuperBuilder;
         @NotNull
         private Nieruchomosc zawiera;
 
+        @OneToMany(mappedBy = "umowaNajmu", cascade = CascadeType.ALL, orphanRemoval = true)
+        @ToString.Exclude
+        private java.util.List<Platnosc> generuje = new java.util.ArrayList<>();
+
         public enum StanUmowy {
             W_EDYCJI,
             SZKIC,
