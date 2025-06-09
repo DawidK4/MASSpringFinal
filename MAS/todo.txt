@@ -21,3 +21,5 @@ Co z ekstensja?
 Zaimplementuj metody
 
 Dodaj zaimplementowane metody do cld
+
+Asocjacja z atrybutem zmien nazwy

@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@ToString
+@ToString // No need to exclude here unless you add a collection
 public class OgloszenieWynajmu {
 
     @Id
@@ -34,6 +34,13 @@ public class OgloszenieWynajmu {
     @JoinColumn(name = "nieruchomosc_id")
     @NotNull
     private Nieruchomosc zawiera;
+
+    // --- Nowa asocjacja z AgentNieruchomosci ---
+    @ManyToOne(optional = false) // OgloszenieWynajmu MUSI mieć AgentaNieruchomosci
+    @JoinColumn(name = "agent_nieruchomosci_id", nullable = false) // Nazwa kolumny klucza obcego
+    @NotNull // Dodatkowa walidacja, aby upewnić się, że pole nie jest null
+    private AgentNieruchomosci jestZarzadzanePrzez; // Pole do przechowywania referencji do AgentaNieruchomosci
+    // ---------------------------------------------
 
     public enum Status {
         AKTUALNE,
