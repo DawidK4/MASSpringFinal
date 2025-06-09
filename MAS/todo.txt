@@ -20,4 +20,4 @@ Co z ekstensja?
 
 Zaimplementuj metody
 
-Jak zaimplementowac ograniczenia unique
+Dodaj zaimplementowane metody do cld

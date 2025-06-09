@@ -23,6 +23,7 @@ public class AgentNieruchomosci {
 
     @NotBlank(message = "Numer licencji agenta nie może być pusty!")
     @NotNull
+    @Column(unique = true)
     private String numerLicencji;
 
     @OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)

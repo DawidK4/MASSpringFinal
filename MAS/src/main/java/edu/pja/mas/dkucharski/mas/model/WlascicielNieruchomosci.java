@@ -23,6 +23,7 @@ public class WlascicielNieruchomosci {
 
     @NotBlank(message = "NIP nie może być pusty!")
     @NotNull
+    @Column(unique = true)
     private String NIP;
 
     @OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
