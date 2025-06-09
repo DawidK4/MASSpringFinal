@@ -7,13 +7,16 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy =  InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 @SuperBuilder
-@ToString
+@ToString(exclude = {"jestZmienianaPrzez", "podlega", "jestZawarteW", "wlasnosciNieruchomosci"}) // Wykluczamy nowe pole
 public abstract class Nieruchomosc {
     /*
     🧠 Justification for JOINED strategy:
@@ -45,18 +48,42 @@ public abstract class Nieruchomosc {
 
     @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
-    private java.util.Set<HistoriaZmiany> jestZmienianaPrzez = new java.util.HashSet<>();
+    private Set<HistoriaZmiany> jestZmienianaPrzez = new HashSet<>();
 
     @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
-    private java.util.Set<UmowaNajmu> podlega = new java.util.HashSet<>();
+    private Set<UmowaNajmu> podlega = new HashSet<>();
 
     @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
-    private java.util.Set<OgloszenieWynajmu> jestZawarteW = new java.util.HashSet<>();
+    private Set<OgloszenieWynajmu> jestZawarteW = new HashSet<>();
+
+    // --- Nowa relacja do klasy asocjacyjnej ---
+    @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
+    // Używamy Set, aby zapewnić unikalność powiązań (jedna nieruchomość - jeden właściciel - jeden udział)
+    private Set<WlasnoscNieruchomosci> wlasnosciNieruchomosci = new HashSet<>();
+    // ------------------------------------------
 
     public enum StatusDostepnosci {
         DOSTEPNE,
         ZAJETE
+    }
+
+    // Metody pomocnicze do zarządzania asocjacją (opcjonalnie, ale dobra praktyka)
+    public void addWlasnosc(WlasnoscNieruchomosci wlasnosc) {
+        if (this.wlasnosciNieruchomosci == null) {
+            this.wlasnosciNieruchomosci = new HashSet<>();
+        }
+        if (!this.wlasnosciNieruchomosci.contains(wlasnosc)) {
+            this.wlasnosciNieruchomosci.add(wlasnosc);
+            wlasnosc.setNieruchomosc(this);
+            // Tutaj nie ustawiamy id, bo ono jest ustawiane w konstruktorze WlasnoscNieruchomosci
+        }
+    }
+
+    public void removeWlasnosc(WlasnoscNieruchomosci wlasnosc) {
+        if (this.wlasnosciNieruchomosci != null && this.wlasnosciNieruchomosci.remove(wlasnosc)) {
+            wlasnosc.setNieruchomosc(null);
+        }
     }
 }
