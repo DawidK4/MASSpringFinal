@@ -15,3 +15,9 @@ brak etykiet
 StanUmowy na clds z wielkiej
 
 ZAimplementuj wyliczanie kwoty netto w Platnosci
+
+Co z ekstensja?
+
+Zaimplementuj metody
+
+Jak zaimplementowac ograniczenia unique
