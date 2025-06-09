@@ -1,0 +1,7 @@
+Implement dynamic validation for Nieruchomosc
+
+Popraw atrybuty w cld
+-liczbaPokoiUzytkowych: int
+-poprzedniWlasciciel: projektowy
+
+Add dataZmiany validation
