@@ -44,10 +44,6 @@ public class Platnosc {
     @Min(0)
     private double kara;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "umowa_najmu_id", nullable = false, updatable = false)
-    private UmowaNajmu jestPrzypisaneDo;
-
     public enum Status{
         ZAPLACONA,
         OCZEKUJACA

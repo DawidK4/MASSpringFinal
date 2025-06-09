@@ -30,31 +30,4 @@ public class AgentNieruchomosci {
     @NotNull
     @Column(unique = true)
     private String numerLicencji;
-
-    @OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "osoba_id", nullable = false, unique = true)
-    private Osoba osoba;
-
-    // --- Nowa asocjacja z OgloszenieWynajmu ---
-    @OneToMany(mappedBy = "agentNieruchomosci", cascade = CascadeType.ALL, orphanRemoval = true)
-    // 'mappedBy' wskazuje pole w klasie OgloszenieWynajmu, które jest właścicielem relacji
-    private Set<OgloszenieWynajmu> zarzadza = new HashSet<>();
-    // ------------------------------------------
-
-    // Metody pomocnicze do zarządzania dwukierunkową relacją (dobra praktyka)
-    public void addOgloszenieWynajmu(OgloszenieWynajmu ogloszenie) {
-        if (this.zarzadza == null) {
-            this.zarzadza = new HashSet<>();
-        }
-        if (!this.zarzadza.contains(ogloszenie)) {
-            this.zarzadza.add(ogloszenie);
-            ogloszenie.setAgentNieruchomosci(this); // Ustawienie referencji powrotnej
-        }
-    }
-
-    public void removeOgloszenieWynajmu(OgloszenieWynajmu ogloszenie) {
-        if (this.zarzadza != null && this.zarzadza.remove(ogloszenie)) {
-            ogloszenie.setAgentNieruchomosci(null); // Usunięcie referencji powrotnej
-        }
-    }
 }

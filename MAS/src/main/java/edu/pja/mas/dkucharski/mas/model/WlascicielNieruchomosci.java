@@ -28,32 +28,4 @@ public class WlascicielNieruchomosci {
     @NotNull
     @Column(unique = true)
     private String NIP;
-
-    @OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "osoba_id", nullable = false, unique = true)
-    private Osoba osoba;
-
-    // --- Nowa relacja do klasy asocjacyjnej ---
-    @OneToMany(mappedBy = "wlascicielNieruchomosci", cascade = CascadeType.ALL, orphanRemoval = true)
-    // Używamy Set, aby zapewnić unikalność powiązań (jeden właściciel - jedna nieruchomość - jeden udział)
-    private Set<Wlasnosc> posiada = new HashSet<>();
-    // ------------------------------------------
-
-    // Metody pomocnicze do zarządzania asocjacją (opcjonalnie, ale dobra praktyka)
-    public void addWlasnosc(Wlasnosc wlasnosc) {
-        if (this.posiada == null) {
-            this.posiada = new HashSet<>();
-        }
-        if (!this.posiada.contains(wlasnosc)) {
-            this.posiada.add(wlasnosc);
-            wlasnosc.setWlascicielNieruchomosci(this);
-            // Tutaj nie ustawiamy id, bo ono jest ustawiane w konstruktorze WlasnoscNieruchomosci
-        }
-    }
-
-    public void removeWlasnosc(Wlasnosc wlasnosc) {
-        if (this.posiada != null && this.posiada.remove(wlasnosc)) {
-            wlasnosc.setWlascicielNieruchomosci(null);
-        }
-    }
 }

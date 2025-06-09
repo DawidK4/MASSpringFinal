@@ -29,9 +29,4 @@ public class HistoriaZmiany {
 
     @Max(400)
     private String opis;
-
-    @ManyToOne
-    @JoinColumn(name = "nieruchomosc_id")
-    @NotNull
-    private Nieruchomosc zapisujeZmianyDla;
 }

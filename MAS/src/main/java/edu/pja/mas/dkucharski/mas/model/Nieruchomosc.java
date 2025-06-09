@@ -16,7 +16,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @SuperBuilder
-@ToString(exclude = {"jestZmienianaPrzez", "podlega", "jestZawarteW", "wlasnosciNieruchomosci"}) // Wykluczamy nowe pole
 public abstract class Nieruchomosc {
     /*
     🧠 Justification for JOINED strategy:
@@ -46,44 +45,8 @@ public abstract class Nieruchomosc {
     @NotNull
     private StatusDostepnosci statusDostepnosci;
 
-    @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
-    @ToString.Exclude
-    private Set<HistoriaZmiany> jestZmienianaPrzez = new HashSet<>();
-
-    @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
-    @ToString.Exclude
-    private Set<UmowaNajmu> podlega = new HashSet<>();
-
-    @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
-    @ToString.Exclude
-    private Set<OgloszenieWynajmu> jestZawarteW = new HashSet<>();
-
-    // --- Nowa relacja do klasy asocjacyjnej ---
-    @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
-    // Używamy Set, aby zapewnić unikalność powiązań (jedna nieruchomość - jeden właściciel - jeden udział)
-    private Set<Wlasnosc> jestPosiadanaPrzez = new HashSet<>();
-    // ------------------------------------------
-
     public enum StatusDostepnosci {
         DOSTEPNE,
         ZAJETE
-    }
-
-    // Metody pomocnicze do zarządzania asocjacją (opcjonalnie, ale dobra praktyka)
-    public void addWlasnosc(Wlasnosc wlasnosc) {
-        if (this.jestPosiadanaPrzez == null) {
-            this.jestPosiadanaPrzez = new HashSet<>();
-        }
-        if (!this.jestPosiadanaPrzez.contains(wlasnosc)) {
-            this.jestPosiadanaPrzez.add(wlasnosc);
-            wlasnosc.setNieruchomosc(this);
-            // Tutaj nie ustawiamy id, bo ono jest ustawiane w konstruktorze WlasnoscNieruchomosci
-        }
-    }
-
-    public void removeWlasnosc(Wlasnosc wlasnosc) {
-        if (this.jestPosiadanaPrzez != null && this.jestPosiadanaPrzez.remove(wlasnosc)) {
-            wlasnosc.setNieruchomosc(null);
-        }
     }
 }
