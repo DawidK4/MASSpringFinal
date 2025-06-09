@@ -5,3 +5,11 @@ Popraw atrybuty w cld
 -poprzedniWlasciciel: projektowy
 
 Add dataZmiany validation
+
+Jak zaimplementowac LocalDate
+
+<< w extend
+
+brak etykiet
+
+StanUmowy na clds z wielkiej

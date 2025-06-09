@@ -49,6 +49,10 @@ public abstract class Nieruchomosc {
 
     @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
+    private java.util.Set<UmowaNajmu> podlega = new java.util.HashSet<>();
+
+    @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private java.util.Set<OgloszenieWynajmu> jestZawarteW = new java.util.HashSet<>();
 
     public enum StatusDostepnosci {
