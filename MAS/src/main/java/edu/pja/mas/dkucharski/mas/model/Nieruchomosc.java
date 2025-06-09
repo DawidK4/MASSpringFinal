@@ -45,7 +45,11 @@ public abstract class Nieruchomosc {
 
     @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
-    private java.util.Set<HistoriaZmiany> historiaZmian = new java.util.HashSet<>();
+    private java.util.Set<HistoriaZmiany> jestZmienianaPrzez = new java.util.HashSet<>();
+
+    @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    private java.util.Set<OgloszenieWynajmu> jestZawarteW = new java.util.HashSet<>();
 
     public enum StatusDostepnosci {
         DOSTEPNE,
