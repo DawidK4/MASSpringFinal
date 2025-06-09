@@ -36,23 +36,23 @@ public class WlascicielNieruchomosci {
     // --- Nowa relacja do klasy asocjacyjnej ---
     @OneToMany(mappedBy = "wlascicielNieruchomosci", cascade = CascadeType.ALL, orphanRemoval = true)
     // Używamy Set, aby zapewnić unikalność powiązań (jeden właściciel - jedna nieruchomość - jeden udział)
-    private Set<WlasnoscNieruchomosci> wlasnosciNieruchomosci = new HashSet<>();
+    private Set<Wlasnosc> posiada = new HashSet<>();
     // ------------------------------------------
 
     // Metody pomocnicze do zarządzania asocjacją (opcjonalnie, ale dobra praktyka)
-    public void addWlasnosc(WlasnoscNieruchomosci wlasnosc) {
-        if (this.wlasnosciNieruchomosci == null) {
-            this.wlasnosciNieruchomosci = new HashSet<>();
+    public void addWlasnosc(Wlasnosc wlasnosc) {
+        if (this.posiada == null) {
+            this.posiada = new HashSet<>();
         }
-        if (!this.wlasnosciNieruchomosci.contains(wlasnosc)) {
-            this.wlasnosciNieruchomosci.add(wlasnosc);
+        if (!this.posiada.contains(wlasnosc)) {
+            this.posiada.add(wlasnosc);
             wlasnosc.setWlascicielNieruchomosci(this);
             // Tutaj nie ustawiamy id, bo ono jest ustawiane w konstruktorze WlasnoscNieruchomosci
         }
     }
 
-    public void removeWlasnosc(WlasnoscNieruchomosci wlasnosc) {
-        if (this.wlasnosciNieruchomosci != null && this.wlasnosciNieruchomosci.remove(wlasnosc)) {
+    public void removeWlasnosc(Wlasnosc wlasnosc) {
+        if (this.posiada != null && this.posiada.remove(wlasnosc)) {
             wlasnosc.setWlascicielNieruchomosci(null);
         }
     }

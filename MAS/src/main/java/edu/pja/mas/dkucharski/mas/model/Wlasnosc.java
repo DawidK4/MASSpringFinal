@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @ToString // Do debugowania
 // Klasa asocjacyjna, która reprezentuje posiadanie nieruchomości przez właściciela
 // i zawiera atrybut asocjacji (udział)
-public class WlasnoscNieruchomosci {
+public class Wlasnosc {
 
     // --- Klucz złożony dla tej asocjacji ---
     // Najlepszym rozwiązaniem jest użycie @IdClass lub @EmbeddedId
@@ -44,7 +44,7 @@ public class WlasnoscNieruchomosci {
     private Double udzial;
 
     // --- Konstruktor do ułatwienia tworzenia, zwłaszcza z builderem ---
-    public WlasnoscNieruchomosci(Nieruchomosc nieruchomosc, WlascicielNieruchomosci wlascicielNieruchomosci, Double udzial) {
+    public Wlasnosc(Nieruchomosc nieruchomosc, WlascicielNieruchomosci wlascicielNieruchomosci, Double udzial) {
         this.nieruchomosc = nieruchomosc;
         this.wlascicielNieruchomosci = wlascicielNieruchomosci;
         this.udzial = udzial;

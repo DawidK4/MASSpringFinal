@@ -61,7 +61,7 @@ public abstract class Nieruchomosc {
     // --- Nowa relacja do klasy asocjacyjnej ---
     @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
     // Używamy Set, aby zapewnić unikalność powiązań (jedna nieruchomość - jeden właściciel - jeden udział)
-    private Set<WlasnoscNieruchomosci> wlasnosciNieruchomosci = new HashSet<>();
+    private Set<Wlasnosc> jestPosiadanaPrzez = new HashSet<>();
     // ------------------------------------------
 
     public enum StatusDostepnosci {
@@ -70,19 +70,19 @@ public abstract class Nieruchomosc {
     }
 
     // Metody pomocnicze do zarządzania asocjacją (opcjonalnie, ale dobra praktyka)
-    public void addWlasnosc(WlasnoscNieruchomosci wlasnosc) {
-        if (this.wlasnosciNieruchomosci == null) {
-            this.wlasnosciNieruchomosci = new HashSet<>();
+    public void addWlasnosc(Wlasnosc wlasnosc) {
+        if (this.jestPosiadanaPrzez == null) {
+            this.jestPosiadanaPrzez = new HashSet<>();
         }
-        if (!this.wlasnosciNieruchomosci.contains(wlasnosc)) {
-            this.wlasnosciNieruchomosci.add(wlasnosc);
+        if (!this.jestPosiadanaPrzez.contains(wlasnosc)) {
+            this.jestPosiadanaPrzez.add(wlasnosc);
             wlasnosc.setNieruchomosc(this);
             // Tutaj nie ustawiamy id, bo ono jest ustawiane w konstruktorze WlasnoscNieruchomosci
         }
     }
 
-    public void removeWlasnosc(WlasnoscNieruchomosci wlasnosc) {
-        if (this.wlasnosciNieruchomosci != null && this.wlasnosciNieruchomosci.remove(wlasnosc)) {
+    public void removeWlasnosc(Wlasnosc wlasnosc) {
+        if (this.jestPosiadanaPrzez != null && this.jestPosiadanaPrzez.remove(wlasnosc)) {
             wlasnosc.setNieruchomosc(null);
         }
     }
