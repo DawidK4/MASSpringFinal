@@ -1,5 +1,6 @@
 package edu.pja.mas.dkucharski.mas;
 
+import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MasApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MasApplication.class, args);
+		Application.launch(JavaFxApp.class, args);
 	}
-
 }
