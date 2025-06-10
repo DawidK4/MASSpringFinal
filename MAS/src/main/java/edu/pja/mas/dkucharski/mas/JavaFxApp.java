@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -15,7 +16,9 @@ public class JavaFxApp extends Application {
 
     @Override
     public void init() {
-        context = new SpringApplicationBuilder(MasApplication.class).run();
+        context = new SpringApplicationBuilder(MasSpringBootApplication.class) // <-- use the correct class here
+                .web(WebApplicationType.NONE)
+                .run();
     }
 
     @Override

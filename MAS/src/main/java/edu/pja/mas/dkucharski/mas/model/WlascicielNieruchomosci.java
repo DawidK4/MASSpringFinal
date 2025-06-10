@@ -32,5 +32,6 @@ public class WlascicielNieruchomosci {
 
     @OneToOne(optional = false)
     @JoinColumn(name = "osoba_id", unique = true)
+    @EqualsAndHashCode.Exclude
     private Osoba osoba;
 }

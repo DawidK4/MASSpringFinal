@@ -6,8 +6,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="edu.pja.mas.dkucharski.mas.controller.MainViewController"
+            maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="599.0" prefWidth="777.0"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text layoutX="22.0" layoutY="48.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Stwórz nową umowę najmu">
          <font>
@@ -19,13 +21,12 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <ListView layoutX="22.0" layoutY="97.0" prefHeight="461.0" prefWidth="370.0" />
+      <ListView fx:id="listView" layoutX="22.0" layoutY="97.0" prefHeight="461.0" prefWidth="370.0" />
       <Text layoutX="392.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wybierz najemce" wrappingWidth="401.01202392578125">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <ListView layoutX="392.0" layoutY="97.0" prefHeight="461.0" prefWidth="370.0" />
-      <Button layoutX="684.0" layoutY="565.0" mnemonicParsing="false" text="Zatwierdź" />
-   </children>
+      <ListView fx:id="najemcaListView" layoutX="392.0" layoutY="97.0" prefHeight="461.0" prefWidth="370.0" />
+      <Button fx:id="zatwierdzButton" layoutX="684.0" layoutY="565.0" mnemonicParsing="false" text="Zatwierdź" />   </children>
 </AnchorPane>
