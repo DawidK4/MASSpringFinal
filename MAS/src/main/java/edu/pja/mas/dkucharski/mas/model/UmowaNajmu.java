@@ -45,7 +45,7 @@ public class UmowaNajmu {
     @ManyToOne(optional = false)
     @JoinColumn(name = "najemca_id", nullable = false)
     @NotNull
-    private Najemca podpisanaPrzez;
+    private Najemca jestPodpisanaPrzez;
 
     public enum StanUmowy {
         W_EDYCJI,
