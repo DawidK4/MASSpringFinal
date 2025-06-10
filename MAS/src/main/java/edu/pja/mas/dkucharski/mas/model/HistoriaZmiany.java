@@ -2,6 +2,7 @@ package edu.pja.mas.dkucharski.mas.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -26,10 +27,14 @@ public class HistoriaZmiany {
     @NotNull
     private String dataZmiany;
 
-//    @NotNull
-//    private WlascicielNieruchomosci poprzedniWlasciciel;
+    @NotNull
+    @NotBlank(message = "Imię poprzedniego właściciela nie może być puste")
+    private String imiePoprzedniegoWlasciciela;
 
-    // In HistoriaZmiany.java
+    @NotNull
+    @NotBlank(message = "Nazwisko poprzedniego właściciela nie może być puste")
+    private String nazwiskoPoprzedniegoWlasciciela;
+
     @ManyToOne
     @JoinColumn(name = "nieruchomosc_id", nullable = false)
     @NotNull
