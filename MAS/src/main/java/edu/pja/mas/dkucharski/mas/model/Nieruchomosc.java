@@ -45,6 +45,27 @@ public abstract class Nieruchomosc {
     @NotNull
     private StatusDostepnosci statusDostepnosci;
 
+    // Add this field to create the reverse association
+    @OneToMany(mappedBy = "zapisujeZmianyDla", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<HistoriaZmiany> jestZawieranaPrzez = new HashSet<>();
+
+    @OneToMany(mappedBy = "zawiera", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<OgloszenieWynajmu> jestCzescia = new HashSet<>();
+
+    @OneToMany(mappedBy = "nieruchomosc", cascade = CascadeType.ALL, orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
+    private Set<Wlasnosc> wlasnosci = new HashSet<>();
+
+    @OneToMany(mappedBy = "dotyczy", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @Builder.Default //Why without this it does not work?
+    private Set<UmowaNajmu> ma = new HashSet<>();
+
     public enum StatusDostepnosci {
         DOSTEPNE,
         ZAJETE

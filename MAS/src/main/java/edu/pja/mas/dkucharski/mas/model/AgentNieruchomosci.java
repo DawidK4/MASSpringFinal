@@ -3,15 +3,10 @@ package edu.pja.mas.dkucharski.mas.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,7 +14,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@ToString(exclude = {"ogloszeniaWynajmu"}) // Wykluczamy kolekcję, aby uniknąć StackOverflowError
 public class AgentNieruchomosci {
 
     @Id
@@ -30,4 +24,13 @@ public class AgentNieruchomosci {
     @NotNull
     @Column(unique = true)
     private String numerLicencji;
+
+    @OneToMany(mappedBy = "jestZarzadzanyPrzez", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<OgloszenieWynajmu> zarzadza = new HashSet<>();
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "osoba_id", unique = true)
+    private Osoba osoba;
 }

@@ -3,11 +3,13 @@ package edu.pja.mas.dkucharski.mas.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import lombok.EqualsAndHashCode;
+import jakarta.validation.constraints.Size;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -24,9 +26,17 @@ public class HistoriaZmiany {
     @NotNull
     private String dataZmiany;
 
-    @NotNull
-    private WlascicielNieruchomosci poprzedniWlasciciel;
+//    @NotNull
+//    private WlascicielNieruchomosci poprzedniWlasciciel;
 
-    @Max(400)
+    // In HistoriaZmiany.java
+    @ManyToOne
+    @JoinColumn(name = "nieruchomosc_id", nullable = false)
+    @NotNull
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Nieruchomosc zapisujeZmianyDla;
+
+    @Size(max = 400)
     private String opis;
 }

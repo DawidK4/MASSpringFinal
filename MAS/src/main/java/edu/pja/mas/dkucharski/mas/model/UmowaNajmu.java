@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -27,6 +30,22 @@ public class UmowaNajmu {
     @Enumerated(EnumType.STRING)
     @NotNull
     private StanUmowy stanUmowy;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "nieruchomosc_id", nullable = false)
+    @NotNull
+    private Nieruchomosc dotyczy;
+
+    @OneToMany(mappedBy = "dotyczy", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @Builder.Default
+    private Set<Platnosc> jestPrzypisanaDo = new HashSet<>();
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "najemca_id", nullable = false)
+    @NotNull
+    private Najemca podpisanaPrzez;
 
     public enum StanUmowy {
         W_EDYCJI,

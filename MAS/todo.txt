@@ -10,6 +10,8 @@ Jak zaimplementowac LocalDate
 
 << w extend
 
+Zmien nazwe asocjajci nieruchomosc - umowa najmu na dotyczy, ma
+
 brak etykiet
 
 StanUmowy na clds z wielkiej
@@ -22,4 +24,8 @@ Zaimplementuj metody
 
 Dodaj zaimplementowane metody do cld
 
-Asocjacja z atrybutem zmien nazwy
+How to implement poprzedniWlascicielw
+
+Usus asocjacje kwalifikowana w NAjmeca i UMowa najmug
+
+Zmien testy na nazwy asocjacji

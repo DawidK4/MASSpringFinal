@@ -3,10 +3,7 @@ package edu.pja.mas.dkucharski.mas.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
@@ -28,4 +25,12 @@ public class WlascicielNieruchomosci {
     @NotNull
     @Column(unique = true)
     private String NIP;
+
+    @OneToMany(mappedBy = "wlasciciel", cascade = CascadeType.ALL, orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
+    private Set<Wlasnosc> wlasnosci = new HashSet<>();
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "osoba_id", unique = true)
+    private Osoba osoba;
 }

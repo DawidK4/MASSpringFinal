@@ -36,4 +36,14 @@ public class Osoba {
     @NotBlank(message = "Adres e-mail nie może być pusty!")
     @NotNull
     private String email;
+
+    @OneToOne(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true)
+    private WlascicielNieruchomosci wlasciciel;
+
+    @OneToOne(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Najemca najemca;
+
+    @OneToOne(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true)
+    private AgentNieruchomosci agent;
+
 }

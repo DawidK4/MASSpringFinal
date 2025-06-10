@@ -3,10 +3,7 @@ package edu.pja.mas.dkucharski.mas.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
@@ -17,7 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@ToString(exclude = {"umowyNajmu"}) // Wykluczamy kolekcję, by uniknąć StackOverflowError
 public class Najemca {
 
     @Id
@@ -28,4 +24,14 @@ public class Najemca {
     @NotNull
     @Column(unique = true) // PESEL powinien być unikalny
     private String PESEL;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "osoba_id", unique = true)
+    private Osoba osoba;
+
+
+    @OneToMany(mappedBy = "jestPodpisanaPrzez", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @Builder.Default
+    private List<UmowaNajmu> podpisal = new ArrayList<>();
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -20,7 +21,7 @@ public class OgloszenieWynajmu {
     private Long id;
 
     @NotBlank(message = "Tytuł ogłoszenia nie może być pusty!")
-    @Max(400)
+    @Size(max = 400)
     private String tytul;
 
     @NotNull
@@ -29,6 +30,18 @@ public class OgloszenieWynajmu {
     @Enumerated(EnumType.STRING)
     @NotNull
     private OgloszenieWynajmu.Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "nieruchomosc_id")
+    @NotNull
+    @ToString.Exclude
+    private Nieruchomosc zawiera;
+
+    @ManyToOne
+    @JoinColumn(name = "agent_id")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private AgentNieruchomosci jestZarzadzanyPrzez;
 
     public enum Status {
         AKTUALNE,
