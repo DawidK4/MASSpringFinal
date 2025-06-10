@@ -1,18 +1,8 @@
 Implement dynamic validation for Nieruchomosc
 
-Popraw atrybuty w cld
--liczbaPokoiUzytkowych: int
--poprzedniWlasciciel: projektowy
-
 Add dataZmiany validation
 
 Jak zaimplementowac LocalDate
-
-<< w extend
-
-Zmien nazwe asocjajci nieruchomosc - umowa najmu na dotyczy, ma
-
-brak etykiet
 
 StanUmowy na clds z wielkiej
 
@@ -23,9 +13,5 @@ Co z ekstensja?
 Zaimplementuj metody
 
 Dodaj zaimplementowane metody do cld
-
-How to implement poprzedniWlascicielw
-
-Usus asocjacje kwalifikowana w NAjmeca i UMowa najmug
 
 Zmien testy na nazwy asocjacji
