@@ -109,22 +109,27 @@ public class MainViewController {
     private void openNextWindow() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CreateUmowaNajmu.fxml"));
-            loader.setControllerFactory(context::getBean); // Pobieranie kontrolera ze Springa
+            loader.setControllerFactory(context::getBean);
 
             Parent root = loader.load();
-
-            // Pobranie kontrolera i przekazanie danych
             CreateUmowaNajmuController controller = loader.getController();
             controller.initData(selectedNieruchomosc, selectedNajemca);
+
+            Stage currentStage = (Stage) zatwierdzButton.getScene().getWindow();
+            double width = currentStage.getWidth();
+            double height = currentStage.getHeight() - 175;
 
             Stage stage = new Stage();
             stage.setTitle("Nowa Umowa Najmu");
             stage.setScene(new Scene(root));
             stage.show();
+
+            // Set size after showing to override FXML defaults
+            stage.setWidth(width);
+            stage.setHeight(height);
         } catch (Exception e) {
             e.printStackTrace();
             showError("Wystąpił błąd przy otwieraniu nowego okna: " + e.getMessage());
         }
     }
-
 }

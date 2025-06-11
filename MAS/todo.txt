@@ -15,3 +15,5 @@ Zaimplementuj metody
 Dodaj zaimplementowane metody do cld
 
 Zmien testy na nazwy asocjacji
+
+jezeli osoba jest wlascicielem to nie moze byc najemca tego samego lokalu

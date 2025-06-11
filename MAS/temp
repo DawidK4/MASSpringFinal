@@ -1,0 +1,10 @@
+Maslo123!
+
+If you want to create a new db:
+1. sudo mysql -u root -p
+2 CREATE DATABASE mas1;
+  GRANT ALL PRIVILEGES ON mas1.* TO 'student'@'localhost';
+  FLUSH PRIVILEGES;
+
+To add a password to the student user:
+ALTER USER 'student'@'localhost' IDENTIFIED BY 'my_password';
