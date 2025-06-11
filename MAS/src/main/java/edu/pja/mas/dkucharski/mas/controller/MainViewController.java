@@ -2,6 +2,7 @@ package edu.pja.mas.dkucharski.mas.controller;
 
 import edu.pja.mas.dkucharski.mas.model.Najemca;
 import edu.pja.mas.dkucharski.mas.model.Nieruchomosc;
+import edu.pja.mas.dkucharski.mas.model.UmowaNajmu;
 import edu.pja.mas.dkucharski.mas.model.Wlasnosc;
 import edu.pja.mas.dkucharski.mas.repository.NajemcaRepository;
 import edu.pja.mas.dkucharski.mas.repository.NieruchomoscRepository;
@@ -42,6 +43,7 @@ public class MainViewController {
 
     private Nieruchomosc selectedNieruchomosc;
     private Najemca selectedNajemca;
+    private UmowaNajmu umowaNajmu;
 
     @Autowired
     public MainViewController(NieruchomoscRepository nieruchomoscRepository, NajemcaRepository najemcaRepository) {
@@ -80,6 +82,11 @@ public class MainViewController {
             selectedNajemca = (idx >= 0 && idx < najemcy.size()) ? najemcy.get(idx) : null;
         });
 
+        UmowaNajmu umowaNajmu = new UmowaNajmu();
+        umowaNajmu.setStanUmowy(UmowaNajmu.StanUmowy.SZKIC);
+        System.out.println("UmowaNajmu initialized with state: " + umowaNajmu.getStanUmowy());
+        this.umowaNajmu = umowaNajmu;
+
         zatwierdzButton.setOnAction(event -> onZatwierdzClicked());
     }
 
@@ -113,7 +120,7 @@ public class MainViewController {
 
             Parent root = loader.load();
             CreateUmowaNajmuController controller = loader.getController();
-            controller.initData(selectedNieruchomosc, selectedNajemca);
+            controller.initData(selectedNieruchomosc, selectedNajemca, umowaNajmu);
 
             Stage currentStage = (Stage) zatwierdzButton.getScene().getWindow();
             double width = currentStage.getWidth();
@@ -124,7 +131,6 @@ public class MainViewController {
             stage.setScene(new Scene(root));
             stage.show();
 
-            // Set size after showing to override FXML defaults
             stage.setWidth(width);
             stage.setHeight(height);
         } catch (Exception e) {

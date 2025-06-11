@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class DataInitializer implements CommandLineRunner {
     private final NieruchomoscRepository nieruchomoscRepository;
@@ -123,11 +125,25 @@ public class DataInitializer implements CommandLineRunner {
 //        umowaNajmuRepository.save(umowa2);
 //
 //        // Create Platnosc
-//        Platnosc platnosc1 = Platnosc.builder().kwotaBrutto(3000).kwotaNetto(2500).dataPlatnosci("2024-07-05").dataWygenerowaniaPlatnosci("2024-07-01").terminPlatnosci("2024-07-10").kara(0).dotyczy(umowa1).build();
-//        Platnosc platnosc2 = Platnosc.builder().kwotaBrutto(2000).kwotaNetto(1800).dataPlatnosci("2024-08-05").dataWygenerowaniaPlatnosci("2024-08-01").terminPlatnosci("2024-08-10").kara(0).dotyczy(umowa2).build();
+//        Platnosc platnosc1 = Platnosc.builder()
+//                .kwotaBrutto(3000)
+//                .dataPlatnosci(LocalDate.parse("2024-07-05"))
+//                .dataWygenerowaniaPlatnosci(LocalDate.parse("2024-07-01"))
+//                .kara(0)
+//                .status(Platnosc.Status.ZAPLACONA)
+//                .dotyczy(umowa1)
+//                .build();
+//
+//        Platnosc platnosc2 = Platnosc.builder()
+//                .kwotaBrutto(2000)
+//                .dataWygenerowaniaPlatnosci(LocalDate.parse("2024-08-01"))
+//                .kara(0)
+//                .status(Platnosc.Status.OCZEKUJACA)
+//                .dotyczy(umowa2)
+//                .build();
 //        platnoscRepository.save(platnosc1);
 //        platnoscRepository.save(platnosc2);
-//
+////
 //        // Create HistoriaZmiany
 //        HistoriaZmiany historia1 = HistoriaZmiany.builder().dataZmiany("2024-05-01").imiePoprzedniegoWlasciciela("Piotr").nazwiskoPoprzedniegoWlasciciela("Zielinski").zapisujeZmianyDla(dom1).opis("Zmiana właściciela.").build();
 //        HistoriaZmiany historia2 = HistoriaZmiany.builder().dataZmiany("2024-05-02").imiePoprzedniegoWlasciciela("Maria").nazwiskoPoprzedniegoWlasciciela("Kowal").zapisujeZmianyDla(apart1).opis("Aktualizacja danych.").build();

@@ -31,13 +31,15 @@ public class CreateUmowaNajmuController {
 
     private Nieruchomosc nieruchomosc;
     private Najemca najemca;
+    private UmowaNajmu umowaNajmu;
 
     @Autowired
     private UmowaNajmuRepository umowaNajmuRepository;
 
-    public void initData(Nieruchomosc nieruchomosc, Najemca najemca) {
+    public void initData(Nieruchomosc nieruchomosc, Najemca najemca, UmowaNajmu umowaNajmu) {
         this.nieruchomosc = nieruchomosc;
         this.najemca = najemca;
+        this.umowaNajmu = umowaNajmu;
     }
 
     @FXML
@@ -56,6 +58,9 @@ public class CreateUmowaNajmuController {
         Double zaliczka = null;
 
         // Validate dates
+        umowaNajmu.setStanUmowy(UmowaNajmu.StanUmowy.W_EDYCJI);
+        System.out.println("UmowaNajmu state set to: " + umowaNajmu.getStanUmowy());
+
         try {
             startDate = LocalDate.parse(startStr);
             endDate = LocalDate.parse(endStr);
@@ -90,15 +95,16 @@ public class CreateUmowaNajmuController {
         }
 
         // Create and save UmowaNajmu
-        UmowaNajmu umowa = new UmowaNajmu();
-        umowa.setDotyczy(nieruchomosc);
-        umowa.setJestPodpisanaPrzez(najemca);
-        umowa.setDataStart(startDate.toString());
-        umowa.setDataKoniec(endDate.toString());
-        umowa.setStanUmowy(UmowaNajmu.StanUmowy.AKTYWNA);
-        umowa.setZaliczka(zaliczka);
 
-        umowaNajmuRepository.save(umowa);
+        umowaNajmu.setDotyczy(nieruchomosc);
+        umowaNajmu.setJestPodpisanaPrzez(najemca);
+        umowaNajmu.setDataStart(startDate.toString());
+        umowaNajmu.setDataKoniec(endDate.toString());
+        umowaNajmu.setZaliczka(zaliczka);
+        umowaNajmu.setStanUmowy(UmowaNajmu.StanUmowy.AKTYWNA);
+        System.out.println("Creating UmowaNajmu with state: " + umowaNajmu.getStanUmowy());
+
+        umowaNajmuRepository.save(umowaNajmu);
 
         showInfo("Lease agreement created successfully.");
         // Optionally, close the window or reset fields

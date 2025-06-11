@@ -1,12 +1,6 @@
 Implement dynamic validation for Nieruchomosc
 
-Add dataZmiany validation
-
-Jak zaimplementowac LocalDate
-
 StanUmowy na clds z wielkiej
-
-ZAimplementuj wyliczanie kwoty netto w Platnosci
 
 Co z ekstensja?
 
@@ -14,6 +8,10 @@ Zaimplementuj metody
 
 Dodaj zaimplementowane metody do cld
 
-Zmien testy na nazwy asocjacji
-
 jezeli osoba jest wlascicielem to nie moze byc najemca tego samego lokalu
+
+format LocalDate
+
+jako <<extend>> dodaj wygenerowanie platnosci
+
+umowa najmu methods

@@ -22,7 +22,7 @@
          </font>
       </Text>
       <Text layoutX="14.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0"
-            text="Wpisz kaucję za miesiąc w zł (niewymagane): ">
+            text="Wpisz kaucję za miesiąc w zł: ">
          <font>
             <Font size="17.0" />
          </font>
