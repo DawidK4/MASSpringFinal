@@ -53,7 +53,11 @@ public class MainViewController {
 
     @FXML
     public void initialize() {
-        nieruchomosci = nieruchomoscRepository.findAllWithWlasnosciAndOwners();
+        nieruchomosci = nieruchomoscRepository.findAllWithWlasnosciAndOwners()
+                .stream()
+                .filter(n -> n.getStatusDostepnosci() == Nieruchomosc.StatusDostepnosci.DOSTEPNE)
+                .collect(Collectors.toList());
+
         List<String> items = nieruchomosci.stream().map(n -> {
             String ownersStr = n.getWlasnosci().stream()
                     .map(Wlasnosc::getWlasciciel)

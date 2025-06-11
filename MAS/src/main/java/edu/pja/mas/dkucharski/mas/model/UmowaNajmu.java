@@ -50,6 +50,7 @@ public class UmowaNajmu {
     public enum StanUmowy {
         W_EDYCJI,
         SZKIC,
-        AKTYWNA
+        AKTYWNA,
+        ZARCHIWIZOWANA
     }
 }

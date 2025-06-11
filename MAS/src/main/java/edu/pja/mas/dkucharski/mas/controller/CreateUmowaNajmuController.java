@@ -72,6 +72,12 @@ public class CreateUmowaNajmuController {
             return;
         }
 
+        // After parsing startDate and endDate
+        if (startDate.isBefore(LocalDate.now())) {
+            showError("Start date cannot be in the past.");
+            return;
+        }
+
         if (endDate.isBefore(startDate)) {
             showError("End date must be after start date.");
             return;
@@ -110,6 +116,7 @@ public class CreateUmowaNajmuController {
         platnosc.setStatus(Platnosc.Status.OCZEKUJACA);
         platnosc.setKara(0.0);
 
+        nieruchomosc.setStatusDostepnosci(Nieruchomosc.StatusDostepnosci.ZAJETE);
         platnoscRepository.save(platnosc);
 
         showInfo("Lease agreement and payment created successfully.");

@@ -23,6 +23,6 @@ public class JednostkaKomercyjna extends Nieruchomosc{
     @Size(max = 200)
     private String przeznaczenie;
 
-    @Min(0)
+    @Min(1)
     private int liczbaPokoiUzytkowych;
 }
