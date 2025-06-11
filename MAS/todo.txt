@@ -1,16 +1,10 @@
-Implement dynamic validation for Nieruchomosc
-
 StanUmowy na clds z wielkiej
-
-Co z ekstensja?
 
 Zaimplementuj metody
 
 Dodaj zaimplementowane metody do cld
 
 jezeli osoba jest wlascicielem to nie moze byc najemca tego samego lokalu
-
-format LocalDate
 
 jako <<extend>> dodaj wygenerowanie platnosci
 

@@ -95,6 +95,14 @@ public class MainViewController {
             showError("Please select both a property and a tenant.");
             return;
         }
+        // Check if Najemca is an owner of the selected Nieruchomosc
+        boolean isOwner = selectedNieruchomosc.getWlasnosci().stream()
+                .map(w -> w.getWlasciciel().getOsoba())
+                .anyMatch(osoba -> osoba.getId().equals(selectedNajemca.getOsoba().getId()));
+        if (isOwner) {
+            showError("The selected tenant is also an owner of this property.");
+            return;
+        }
         if (selectedNieruchomosc.getStatusDostepnosci() == Nieruchomosc.StatusDostepnosci.ZAJETE) {
             showError("Nieruchomosc is already zajeta");
             return;

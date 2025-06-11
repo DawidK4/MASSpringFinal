@@ -1,6 +1,7 @@
 package edu.pja.mas.dkucharski.mas.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,12 +18,6 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.JOINED)
 @SuperBuilder
 public abstract class Nieruchomosc {
-    /*
-    🧠 Justification for JOINED strategy:
-    Clear normalization between User, Customer, and Employee; avoids data duplication and keeps integrity.
-    💡 Counter-example: SINGLE_TABLE may lead to many nullable columns and data redundancy in large systems.
-    SINGLE_TABLE is suitable when the tables do not differ much due to little null column values
-     */
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,7 +40,6 @@ public abstract class Nieruchomosc {
     @NotNull
     private StatusDostepnosci statusDostepnosci;
 
-    // Add this field to create the reverse association
     @OneToMany(mappedBy = "zapisujeZmianyDla", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -63,7 +57,7 @@ public abstract class Nieruchomosc {
     @OneToMany(mappedBy = "dotyczy", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @Builder.Default //Why without this it does not work?
+    @Builder.Default
     private Set<UmowaNajmu> ma = new HashSet<>();
 
     public enum StatusDostepnosci {

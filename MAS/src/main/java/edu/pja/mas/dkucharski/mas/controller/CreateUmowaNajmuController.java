@@ -2,7 +2,9 @@ package edu.pja.mas.dkucharski.mas.controller;
 
 import edu.pja.mas.dkucharski.mas.model.Najemca;
 import edu.pja.mas.dkucharski.mas.model.Nieruchomosc;
+import edu.pja.mas.dkucharski.mas.model.Platnosc;
 import edu.pja.mas.dkucharski.mas.model.UmowaNajmu;
+import edu.pja.mas.dkucharski.mas.repository.PlatnoscRepository;
 import edu.pja.mas.dkucharski.mas.repository.UmowaNajmuRepository;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -36,6 +38,9 @@ public class CreateUmowaNajmuController {
     @Autowired
     private UmowaNajmuRepository umowaNajmuRepository;
 
+    @Autowired
+    private PlatnoscRepository platnoscRepository;
+
     public void initData(Nieruchomosc nieruchomosc, Najemca najemca, UmowaNajmu umowaNajmu) {
         this.nieruchomosc = nieruchomosc;
         this.najemca = najemca;
@@ -57,9 +62,7 @@ public class CreateUmowaNajmuController {
         LocalDate startDate, endDate;
         Double zaliczka = null;
 
-        // Validate dates
         umowaNajmu.setStanUmowy(UmowaNajmu.StanUmowy.W_EDYCJI);
-        System.out.println("UmowaNajmu state set to: " + umowaNajmu.getStanUmowy());
 
         try {
             startDate = LocalDate.parse(startStr);
@@ -74,7 +77,6 @@ public class CreateUmowaNajmuController {
             return;
         }
 
-        // Validate zaliczka (optional)
         if (zaliczkaStr != null && !zaliczkaStr.isBlank()) {
             try {
                 zaliczka = Double.parseDouble(zaliczkaStr);
@@ -88,13 +90,10 @@ public class CreateUmowaNajmuController {
             }
         }
 
-        // Validate associations
         if (najemca == null || nieruchomosc == null) {
             showError("Missing tenant or property.");
             return;
         }
-
-        // Create and save UmowaNajmu
 
         umowaNajmu.setDotyczy(nieruchomosc);
         umowaNajmu.setJestPodpisanaPrzez(najemca);
@@ -102,12 +101,18 @@ public class CreateUmowaNajmuController {
         umowaNajmu.setDataKoniec(endDate.toString());
         umowaNajmu.setZaliczka(zaliczka);
         umowaNajmu.setStanUmowy(UmowaNajmu.StanUmowy.AKTYWNA);
-        System.out.println("Creating UmowaNajmu with state: " + umowaNajmu.getStanUmowy());
 
         umowaNajmuRepository.save(umowaNajmu);
 
-        showInfo("Lease agreement created successfully.");
-        // Optionally, close the window or reset fields
+        Platnosc platnosc = new Platnosc();
+        platnosc.setDotyczy(umowaNajmu);
+        platnosc.setKwotaBrutto(nieruchomosc.getCenaNajmu());
+        platnosc.setStatus(Platnosc.Status.OCZEKUJACA);
+        platnosc.setKara(0.0);
+
+        platnoscRepository.save(platnosc);
+
+        showInfo("Lease agreement and payment created successfully.");
     }
 
     private void showError(String message) {
