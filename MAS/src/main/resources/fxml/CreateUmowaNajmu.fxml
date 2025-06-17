@@ -10,13 +10,13 @@
             fx:controller="edu.pja.mas.dkucharski.mas.controller.CreateUmowaNajmuController">
    <children>
       <Text layoutX="14.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0"
-            text="Wpisz datę rozpoczęcia umowy (formatrrrr-mm-dd):">
+            text="Wpisz datę rozpoczęcia umowy (format: rrrr-mm-dd):">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
       <Text layoutX="14.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0"
-            text="Wpisz datę końca umowy (formatrrrr-mm-dd):">
+            text="Wpisz datę końca umowy (format: rrrr-mm-dd):">
          <font>
             <Font size="17.0" />
          </font>
